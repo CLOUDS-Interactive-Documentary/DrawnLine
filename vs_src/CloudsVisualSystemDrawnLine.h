@@ -13,14 +13,14 @@
 #include "CloudsVisualSystem.h"
 
 //TODO: rename this to your own visual system
-class CloudsVisualSystemEmpty : public CloudsVisualSystem {
+class CloudsVisualSystemDrawnLine : public CloudsVisualSystem {
   public:
     
 	//TODO: Change this to the name of your visual system
 	//This determines your data path so name it at first!
 	//ie getVisualSystemDataPath() uses this
     string getSystemName(){
-		return "EmptySystem";
+		return "DrawnLine";
 	}
 
 	//These methods let us add custom GUI parameters and respond to their events
@@ -84,20 +84,11 @@ class CloudsVisualSystemEmpty : public CloudsVisualSystem {
     void selfMousePressed(ofMouseEventArgs& data);
     void selfMouseReleased(ofMouseEventArgs& data);
 	
-
     // if you use a custom camera to fly through the scene
 	// you must implement this method for the transitions to work properly
 //	ofCamera& getCameraRef(){
 //		return myCustomCamera;
 //	}
-
-	//
-	ofCamera& getCameraRef(){
-		if(videoLoaded){
-			return cloudsCamera;
-		}
-		return CloudsVisualSystem::getCameraRef();
-	}
 
 protected:
     
@@ -109,8 +100,4 @@ protected:
 	float customFloat1;
 	float customFloat2;
 	
-	bool videoLoaded;
-	ofImage someImage;
-	ofShader pointcloudShader;
-	ofVboMesh simplePointcloud;
 };

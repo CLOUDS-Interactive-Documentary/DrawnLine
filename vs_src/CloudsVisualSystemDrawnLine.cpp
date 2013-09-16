@@ -1,9 +1,9 @@
 //
-//  CloudsVisualSystemEmpty.cpp
+//  CloudsVisualSystemDrawnLine.cpp
 //
 
-#include "CloudsVisualSystemEmpty.h"
-#include "CloudsRGBDVideoPlayer.h"
+#include "CloudsVisualSystemDrawnLine.h"
+//#include "CloudsRGBDVideoPlayer.h"
 
 //#include "CloudsRGBDVideoPlayer.h"
 //#ifdef AVF_PLAYER
@@ -11,7 +11,7 @@
 //#endif
 
 //These methods let us add custom GUI parameters and respond to their events
-void CloudsVisualSystemEmpty::selfSetupGui(){
+void CloudsVisualSystemDrawnLine::selfSetupGui(){
 
 	customGui = new ofxUISuperCanvas("CUSTOM", gui);
 	customGui->copyCanvasStyle(gui);
@@ -24,58 +24,40 @@ void CloudsVisualSystemEmpty::selfSetupGui(){
 	customGui->addButton("Custom Button", false);
 	customGui->addToggle("Custom Toggle", &customToggle);
 	
-	ofAddListener(customGui->newGUIEvent, this, &CloudsVisualSystemEmpty::selfGuiEvent);
+	ofAddListener(customGui->newGUIEvent, this, &CloudsVisualSystemDrawnLine::selfGuiEvent);
 	guis.push_back(customGui);
 	guimap[customGui->getName()] = customGui;
 }
 
-void CloudsVisualSystemEmpty::selfGuiEvent(ofxUIEventArgs &e){
+void CloudsVisualSystemDrawnLine::selfGuiEvent(ofxUIEventArgs &e){
 	if(e.widget->getName() == "Custom Button"){
 		cout << "Button pressed!" << endl;
 	}
 }
 
 //Use system gui for global or logical settings, for exmpl
-void CloudsVisualSystemEmpty::selfSetupSystemGui(){
+void CloudsVisualSystemDrawnLine::selfSetupSystemGui(){
 	
 }
 
-void CloudsVisualSystemEmpty::guiSystemEvent(ofxUIEventArgs &e){
+void CloudsVisualSystemDrawnLine::guiSystemEvent(ofxUIEventArgs &e){
 	
 }
 //use render gui for display settings, like changing colors
-void CloudsVisualSystemEmpty::selfSetupRenderGui(){
+void CloudsVisualSystemDrawnLine::selfSetupRenderGui(){
 
 }
 
-void CloudsVisualSystemEmpty::guiRenderEvent(ofxUIEventArgs &e){
+void CloudsVisualSystemDrawnLine::guiRenderEvent(ofxUIEventArgs &e){
 	
 }
 
 // selfSetup is called when the visual system is first instantiated
 // This will be called during a "loading" screen, so any big images or
 // geometry should be loaded here
-void CloudsVisualSystemEmpty::selfSetup(){
-	
-	videoLoaded = false;
-	
-	if(ofFile::doesFileExist(getVisualSystemDataPath() + "TestVideo/Jer_TestVideo.mov")){
-		getRGBDVideoPlayer().setup(getVisualSystemDataPath() + "TestVideo/Jer_TestVideo.mov",
-								   getVisualSystemDataPath() + "TestVideo/Jer_TestVideo.xml" );
-		
-		getRGBDVideoPlayer().swapAndPlay();
-		
-		for(int i = 0; i < 640; i += 2){
-			for(int j = 0; j < 480; j+=2){
-				simplePointcloud.addVertex(ofVec3f(i,j,0));
-			}
-		}
-		
-		pointcloudShader.load(getVisualSystemDataPath() + "shaders/rgbdcombined");
-		videoLoaded = true;
-	}
-	
-	
+void CloudsVisualSystemDrawnLine::selfSetup(){
+
+	//make sure to include getVisualSystemDataPath() when accessing data
 //	someImage.loadImage( getVisualSystemDataPath() + "images/someImage.png";
 	
 }
@@ -83,50 +65,40 @@ void CloudsVisualSystemEmpty::selfSetup(){
 // selfPresetLoaded is called whenever a new preset is triggered
 // it'll be called right before selfBegin() and you may wish to
 // refresh anything that a preset may offset, such as stored colors or particles
-void CloudsVisualSystemEmpty::selfPresetLoaded(string presetPath){
+void CloudsVisualSystemDrawnLine::selfPresetLoaded(string presetPath){
 	
 }
 
 // selfBegin is called when the system is ready to be shown
 // this is a good time to prepare for transitions
 // but try to keep it light weight as to not cause stuttering
-void CloudsVisualSystemEmpty::selfBegin(){
+void CloudsVisualSystemDrawnLine::selfBegin(){
 	
 }
 
 //do things like ofRotate/ofTranslate here
 //any type of transformation that doesn't have to do with the camera
-void CloudsVisualSystemEmpty::selfSceneTransformation(){
+void CloudsVisualSystemDrawnLine::selfSceneTransformation(){
 	
 }
 
 //normal update call
-void CloudsVisualSystemEmpty::selfUpdate(){
+void CloudsVisualSystemDrawnLine::selfUpdate(){
 
 }
 
 // selfDraw draws in 3D using the default ofEasyCamera
 // you can change the camera by returning getCameraRef()
-void CloudsVisualSystemEmpty::selfDraw(){
-	
-	if(videoLoaded){
-		ofPushMatrix();
-		setupRGBDTransforms();
-		pointcloudShader.begin();
-		getRGBDVideoPlayer().setupProjectionUniforms(pointcloudShader);
-		simplePointcloud.drawVertices();
-		pointcloudShader.end();
-		ofPopMatrix();
-	}
-	
+void CloudsVisualSystemDrawnLine::selfDraw(){
+		
 }
 
 // draw any debug stuff here
-void CloudsVisualSystemEmpty::selfDrawDebug(){
+void CloudsVisualSystemDrawnLine::selfDrawDebug(){
 	
 }
 // or you can use selfDrawBackground to do 2D drawings that don't use the 3D camera
-void CloudsVisualSystemEmpty::selfDrawBackground(){
+void CloudsVisualSystemDrawnLine::selfDrawBackground(){
 
 	//turn the background refresh off
 	//bClearBackground = false;
@@ -134,37 +106,36 @@ void CloudsVisualSystemEmpty::selfDrawBackground(){
 }
 // this is called when your system is no longer drawing.
 // Right after this selfUpdate() and selfDraw() won't be called any more
-void CloudsVisualSystemEmpty::selfEnd(){
+void CloudsVisualSystemDrawnLine::selfEnd(){
 	
-	simplePointcloud.clear();
 	
 }
 // this is called when you should clear all the memory and delet anything you made in setup
-void CloudsVisualSystemEmpty::selfExit(){
+void CloudsVisualSystemDrawnLine::selfExit(){
 	
 }
 
 //events are called when the system is active
 //Feel free to make things interactive for you, and for the user!
-void CloudsVisualSystemEmpty::selfKeyPressed(ofKeyEventArgs & args){
+void CloudsVisualSystemDrawnLine::selfKeyPressed(ofKeyEventArgs & args){
 	
 }
-void CloudsVisualSystemEmpty::selfKeyReleased(ofKeyEventArgs & args){
-	
-}
-
-void CloudsVisualSystemEmpty::selfMouseDragged(ofMouseEventArgs& data){
+void CloudsVisualSystemDrawnLine::selfKeyReleased(ofKeyEventArgs & args){
 	
 }
 
-void CloudsVisualSystemEmpty::selfMouseMoved(ofMouseEventArgs& data){
+void CloudsVisualSystemDrawnLine::selfMouseDragged(ofMouseEventArgs& data){
 	
 }
 
-void CloudsVisualSystemEmpty::selfMousePressed(ofMouseEventArgs& data){
+void CloudsVisualSystemDrawnLine::selfMouseMoved(ofMouseEventArgs& data){
 	
 }
 
-void CloudsVisualSystemEmpty::selfMouseReleased(ofMouseEventArgs& data){
+void CloudsVisualSystemDrawnLine::selfMousePressed(ofMouseEventArgs& data){
+	
+}
+
+void CloudsVisualSystemDrawnLine::selfMouseReleased(ofMouseEventArgs& data){
 	
 }
