@@ -1,6 +1,4 @@
-# Empty Visual System 
-
-Welcome to the CLOUDS Interactive Documentary CodeStorm! We'll be creating Visual Systems, modular visual sketches used that are used along with the pointcloud interviews to illustrate the concepts presented in the film.
+# Clouds Visual System 
 
 In order to make the process of making a VisualSystem efficient and easy we have put together a wrapper that is a lot like a testApp.cpp but with ofxTimeline and ofxUI built in for variable and animation controls. The system can also store all the settings in presets letting you configure each sketch in different ways and invoke the visuals within the film.
 
